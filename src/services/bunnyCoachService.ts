@@ -28,7 +28,7 @@ class BunnyCoachService {
 
       let moveSuggestion = '';
       if (bestMove) {
-        moveSuggestion = `Bunny Engine suggests looking at move **${bestMove.san || `${bestMove.from} ➔ ${bestMove.to}`}** for tactical play! 🐰`;
+        moveSuggestion = `Bunny Engine suggests looking at move **${(bestMove as any).san || `${bestMove.from} ➔ ${bestMove.to}`}** for tactical play! 🐰`;
       } else {
         moveSuggestion = "Control the center and keep your King safe! 👑";
       }
