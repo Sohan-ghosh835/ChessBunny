@@ -1,0 +1,34 @@
+{
+  "short_name": "ChessBunny",
+  "name": "ChessBunny — Adorable Modern Web Chess",
+  "description": "ChessBunny is a modern, adorable, premium-looking web chess game with online duels, Stockfish WASM bot, custom ceramic SVG pieces, and cute pink aesthetic.",
+  "icons": [
+    {
+      "src": "/favicon.jpg",
+      "type": "image/jpeg",
+      "sizes": "630x680"
+    },
+    {
+      "src": "/pwa-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#fff0f5",
+  "theme_color": "#ec4899",
+  "display": "standalone",
+  "orientation": "portrait"
+}
