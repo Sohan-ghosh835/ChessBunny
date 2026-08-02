@@ -88,7 +88,8 @@ export const App: React.FC = () => {
 
   // Setup Socket Connection for Private Rooms
   useEffect(() => {
-    const backendUrl = import.meta.env.VITE_BACKEND_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : 'https://chessbunnybackend.onrender.com');
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || (isLocalhost ? 'http://localhost:3001' : 'https://chessbunnybackend.onrender.com');
     const socket = io(backendUrl, { autoConnect: true });
     socketRef.current = socket;
 
