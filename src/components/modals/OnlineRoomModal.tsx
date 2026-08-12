@@ -50,7 +50,7 @@ export const OnlineRoomModal: React.FC<OnlineRoomModalProps> = ({
         </button>
 
         <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--accent)', fontFamily: 'var(--font-heading)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Globe size={24} /> Online Room Duel 🌸
+          <Globe size={24} /> Online Room Duel
         </div>
 
         {/* If room code generated */}
@@ -75,7 +75,7 @@ export const OnlineRoomModal: React.FC<OnlineRoomModalProps> = ({
               {copied ? <Check size={16} /> : <Copy size={16} />} {copied ? 'Copied!' : 'Copy Code'}
             </button>
             <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontStyle: 'italic' }}>
-              Waiting for player 2 to join... ✨
+              Waiting for player 2 to join...
             </div>
           </div>
         ) : (

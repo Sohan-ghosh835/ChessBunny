@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Award, X, Edit2 } from 'lucide-react';
+import { Award, X, Edit2, User } from 'lucide-react';
 
 interface ProfileModalProps {
   onClose: () => void;
 }
 
 export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
-  const [username, setUsername] = useState('Bunny Master 🐰');
+  const [username, setUsername] = useState('Bunny Master');
   const [isEditing, setIsEditing] = useState(false);
 
   const stats = {
@@ -17,10 +17,10 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
   };
 
   const achievements = [
-    { title: 'First Mate 👑', desc: 'Delivered your first checkmate' },
-    { title: 'AI Slayer 🤖', desc: 'Defeated Hard AI bot' },
-    { title: 'Speedy Bunny ⚡', desc: 'Won a blitz duel under 2 mins' },
-    { title: 'Tactics Fan 🧩', desc: 'Solved 10 tactical puzzles' }
+    { title: 'First Mate', desc: 'Delivered your first checkmate' },
+    { title: 'AI Slayer', desc: 'Defeated Hard AI bot' },
+    { title: 'Speedy Bunny', desc: 'Won a blitz duel under 2 mins' },
+    { title: 'Tactics Fan', desc: 'Solved 10 tactical puzzles' }
   ];
 
   return (
@@ -56,11 +56,10 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose }) => {
             alignItems: 'center',
             justifyContent: 'center',
             color: 'white',
-            boxShadow: 'var(--shadow-glow)',
-            fontSize: '2rem'
+            boxShadow: 'var(--shadow-glow)'
           }}
         >
-          🐰
+          <User size={36} />
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>

@@ -9,10 +9,10 @@ interface PromotionModalProps {
 
 export const PromotionModal: React.FC<PromotionModalProps> = ({ color, onSelect }) => {
   const pieces: Array<{ type: 'q' | 'r' | 'n' | 'b'; label: string }> = [
-    { type: 'q', label: 'Queen 👑' },
-    { type: 'r', label: 'Rook 🏰' },
-    { type: 'n', label: 'Knight 🐴' },
-    { type: 'b', label: 'Bishop ⛪' }
+    { type: 'q', label: 'Queen' },
+    { type: 'r', label: 'Rook' },
+    { type: 'n', label: 'Knight' },
+    { type: 'b', label: 'Bishop' }
   ];
 
   return (
@@ -31,7 +31,7 @@ export const PromotionModal: React.FC<PromotionModalProps> = ({ color, onSelect 
         }}
       >
         <div style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--accent)', fontFamily: 'var(--font-heading)' }}>
-          Pawn Promotion ✨
+          Pawn Promotion
         </div>
         <div style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>
           Choose a piece to promote your pawn:

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Chess, Square } from 'chess.js';
+import { Bot } from 'lucide-react';
 import { PieceSVG } from './pieces/PieceSVG';
 import { audioService } from '../services/audioService';
 
@@ -262,8 +263,9 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
             <motion.span
               animate={{ rotate: 360 }}
               transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }}
+              style={{ display: 'inline-flex' }}
             >
-              🌸
+              <Bot size={14} />
             </motion.span>
             Bunny is thinking...
           </div>

@@ -35,8 +35,8 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
   }, [winner]);
 
   const getTitle = () => {
-    if (winner === 'draw') return 'Stalemate / Draw 🌸';
-    return winner === 'w' ? 'White Bunny Wins! 👑' : 'Black Bunny Wins! 👑';
+    if (winner === 'draw') return 'Stalemate / Draw';
+    return winner === 'w' ? 'White Bunny Wins!' : 'Black Bunny Wins!';
   };
 
   const handlePlayAgain = () => {
@@ -93,7 +93,7 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
         </div>
 
         <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-          {reason || 'Game over! What a cute match 🌸'}
+          {reason || 'Game over! What a match'}
         </div>
 
         <div style={{ display: 'flex', gap: '0.8rem', width: '100%', marginTop: '0.5rem' }}>

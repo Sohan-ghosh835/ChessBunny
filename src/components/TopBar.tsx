@@ -21,7 +21,7 @@ interface TopBarProps {
   mode: GameMode;
   setMode: (mode: GameMode) => void;
   difficulty: DifficultyLevel;
-  setDifficulty: (diff: DifficultyLevel) => void;
+  onDifficultyChange: (diff: DifficultyLevel) => void;
   theme: 'light' | 'dark';
   setTheme: (t: 'light' | 'dark') => void;
   soundEnabled: boolean;
@@ -36,7 +36,7 @@ export const TopBar: React.FC<TopBarProps> = ({
   mode,
   setMode,
   difficulty,
-  setDifficulty,
+  onDifficultyChange,
   theme,
   setTheme,
   soundEnabled,
@@ -154,7 +154,7 @@ export const TopBar: React.FC<TopBarProps> = ({
             value={difficulty}
             onChange={(e) => {
               audioService.playClick();
-              setDifficulty(e.target.value as DifficultyLevel);
+              onDifficultyChange(e.target.value as DifficultyLevel);
             }}
             className="difficulty-dropdown"
           >

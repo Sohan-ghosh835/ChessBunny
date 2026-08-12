@@ -20,7 +20,7 @@ const openingsMap: Record<string, ChessOpening> = {
 };
 
 export function getOpeningName(history: string[]): string {
-  if (!history || history.length === 0) return 'Standard Start 🌸';
+  if (!history || history.length === 0) return 'Standard Start';
   
   const moveStr = history.slice(0, 4).join(' ');
   
@@ -31,5 +31,5 @@ export function getOpeningName(history: string[]): string {
     }
   }
 
-  return 'Custom Game 🌸';
+  return 'Custom Game';
 }

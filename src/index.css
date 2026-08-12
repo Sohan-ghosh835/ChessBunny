@@ -457,3 +457,366 @@ html, body {
 .drop-target {
   background: rgba(255, 199, 226, 0.6) !important;
 }
+
+/* StatusBar Component Styles */
+.status-bar-card {
+  width: 100%;
+  max-width: 580px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.status-bar-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.status-player-card {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+  min-width: 0; /* allow shrinking */
+  flex-shrink: 1;
+  overflow: hidden;
+}
+
+.status-player-card.active-turn {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+.status-king-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.status-player-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+.status-player-name.text-right {
+  text-align: right;
+}
+
+.status-captured-row {
+  display: flex;
+  gap: 1px;
+  height: 14px;
+  align-items: center;
+  max-width: 96px;
+  overflow: hidden;
+  flex-wrap: nowrap;
+}
+
+.status-captured-row.justify-end {
+  justify-content: flex-end;
+}
+
+.status-captured-piece {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.status-player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Desktop: show piece icons, hide badge */
+.desktop-only { display: flex; }
+.mobile-only  { display: none; }
+
+.status-material-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 14px;
+}
+
+.status-material-count {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.status-material-advantage {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.status-diff-text {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-left: 4px;
+}
+
+.status-move-counter {
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.status-move-number {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-turn-text {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--accent);
+  font-family: var(--font-heading);
+  white-space: nowrap;
+}
+
+.status-bar-middle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.status-clock-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg-secondary);
+  padding: 0.35rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  font-family: monospace;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.status-clock-badge.active {
+  color: var(--accent);
+}
+
+.status-eval-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0 0.25rem;
+  align-items: center;
+  width: 100%;
+}
+
+.status-eval-labels {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.status-eval-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 99px;
+  background: #FFFFFF;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border-glass);
+}
+
+.status-eval-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF7AC1, #FF4FA3);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+.status-timer-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.15rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 99px;
+  border: 1.5px solid var(--border-glass);
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.status-timer-btn.enabled {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+/* Bottom Controls Component Styles */
+.bottom-controls-card {
+  width: 100%;
+  max-width: 580px;
+  padding: 0.6rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.bottom-controls-card .bunny-btn {
+  padding: 0.45rem 0.75rem;
+  font-size: 0.82rem;
+}
+
+/* Mobile responsive styling for single horizontal line in StatusBar & Grid in BottomControls */
+@media (max-width: 640px) {
+  .status-bar-card {
+    padding: 0.5rem 0.6rem;
+    gap: 0.5rem;
+  }
+
+  .status-bar-top-row {
+    flex-wrap: nowrap !important;
+    justify-content: space-between !important;
+    gap: 0.2rem !important;
+  }
+
+  .status-player-card {
+    padding: 0.25rem 0.45rem !important;
+    gap: 0.3rem !important;
+    border-radius: 10px !important;
+  }
+
+  .status-king-icon {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .status-player-name {
+    font-size: 0.72rem !important;
+    white-space: nowrap !important;
+  }
+
+  .status-move-counter {
+    padding: 0 0.15rem !important;
+  }
+
+  .status-move-number {
+    font-size: 0.62rem !important;
+    white-space: nowrap !important;
+  }
+
+  .status-turn-text {
+    font-size: 0.68rem !important;
+    white-space: nowrap !important;
+  }
+
+  .status-eval-track {
+    height: 10px !important;
+  }
+
+  /* Swap desktop icons ↔ mobile badge */
+  .desktop-only { display: none !important; }
+  .mobile-only  { display: flex !important; }
+
+  /* Bottom Controls 4-column balanced grid for mobile */
+  .bottom-controls-card {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 0.35rem !important;
+    padding: 0.45rem 0.5rem !important;
+  }
+
+  .bottom-controls-card .btn-new-game {
+    grid-column: span 2 !important;
+  }
+
+  .bottom-controls-card .bunny-btn {
+    width: 100% !important;
+    padding: 0.4rem 0.2rem !important;
+    font-size: 0.73rem !important;
+    justify-content: center !important;
+  }
+}
+
+/* ==========================================
+   Puzzle Category Cards
+   ========================================== */
+.puzzle-category-card {
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  cursor: pointer;
+  background: var(--bg-secondary);
+  border: 1.5px solid transparent;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  text-align: left;
+}
+
+.puzzle-category-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(255, 79, 163, 0.18);
+}
+
+/* Difficulty change toast notification */
+.difficulty-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background: var(--accent);
+  color: white;
+  padding: 0.55rem 1.3rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  font-family: var(--font-heading);
+  box-shadow: 0 4px 18px rgba(255, 79, 163, 0.45);
+  z-index: 9999;
+  animation: toastIn 0.25s ease, toastOut 0.3s ease 1.5s forwards;
+  pointer-events: none;
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; }
+  to   { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+}
+

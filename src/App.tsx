@@ -56,6 +56,7 @@ export const App: React.FC = () => {
   // Timers (in seconds)
   const [whiteTime, setWhiteTime] = useState<number>(300);
   const [blackTime, setBlackTime] = useState<number>(300);
+  const [timerEnabled, setTimerEnabled] = useState<boolean>(false);
 
   // Evaluation
   const [evalScore, setEvalScore] = useState<number>(0);
@@ -85,6 +86,10 @@ export const App: React.FC = () => {
   const [showReviewModal, setShowReviewModal] = useState<boolean>(false);
   const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false);
   const [showProfileModal, setShowProfileModal] = useState<boolean>(false);
+
+  // Difficulty change toast
+  const [difficultyToast, setDifficultyToast] = useState<string | null>(null);
+  const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Setup Socket Connection for Private Rooms
   useEffect(() => {
@@ -141,7 +146,7 @@ export const App: React.FC = () => {
     });
 
     socket.on('error_message', (msg) => {
-      alert(`Bunny Notice 🌸: ${msg}`);
+      alert(`Bunny Notice: ${msg}`);
     });
 
     return () => {
@@ -151,7 +156,7 @@ export const App: React.FC = () => {
 
   // Timer Interval for local / AI games
   useEffect(() => {
-    if (chess.isGameOver() || mode === 'online') return;
+    if (!timerEnabled || chess.isGameOver() || mode === 'online') return;
 
     const timer = setInterval(() => {
       if (chess.turn() === 'w') {
@@ -174,7 +179,7 @@ export const App: React.FC = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [chess, mode, fen]);
+  }, [chess, mode, fen, timerEnabled]);
 
   // Update captured pieces & eval score on fen change
   useEffect(() => {
@@ -375,6 +380,25 @@ export const App: React.FC = () => {
     setBlackTime(300);
     setIsThinking(false);
     setShowGameOver(false);
+    // Do NOT reset timerEnabled — preserve user's preference across games
+  };
+
+  // Handle Difficulty Change — auto-resets to a fresh game at new level
+  const handleDifficultyChange = (newDiff: DifficultyLevel) => {
+    setDifficulty(newDiff);
+    if (mode === 'ai') {
+      resetGame();
+      setIsFlipped(false);
+      const labels: Record<DifficultyLevel, string> = {
+        easy:   'Easy (~800) — New game started!',
+        medium: 'Medium (~1300) — New game started!',
+        hard:   'Hard (~1800) — New game started!',
+        expert: 'Expert (~2300) — New game started!'
+      };
+      if (toastTimerRef.current) clearTimeout(toastTimerRef.current);
+      setDifficultyToast(labels[newDiff]);
+      toastTimerRef.current = setTimeout(() => setDifficultyToast(null), 1900);
+    }
   };
 
   // Handle Mode Change Trigger
@@ -413,19 +437,24 @@ export const App: React.FC = () => {
       
       {/* Background Floating Hearts */}
       <div className="bg-particles-layer">
-        <span className="floating-heart" style={{ left: '10%', animationDelay: '0s' }}>🌸</span>
+        <span className="floating-heart" style={{ left: '10%', animationDelay: '0s' }}>♡</span>
         <span className="floating-heart" style={{ left: '25%', animationDelay: '3s' }}>♡</span>
-        <span className="floating-heart" style={{ left: '45%', animationDelay: '6s' }}>✨</span>
-        <span className="floating-heart" style={{ left: '70%', animationDelay: '1s' }}>🌸</span>
+        <span className="floating-heart" style={{ left: '45%', animationDelay: '6s' }}>♡</span>
+        <span className="floating-heart" style={{ left: '70%', animationDelay: '1s' }}>♡</span>
         <span className="floating-heart" style={{ left: '88%', animationDelay: '4s' }}>♡</span>
       </div>
+
+      {/* Difficulty change toast */}
+      {difficultyToast && (
+        <div className="difficulty-toast">{difficultyToast}</div>
+      )}
 
       {/* Top Bar Header */}
       <TopBar
         mode={mode}
         setMode={handleSetMode}
         difficulty={difficulty}
-        setDifficulty={setDifficulty}
+        onDifficultyChange={handleDifficultyChange}
         theme={theme}
         setTheme={setTheme}
         soundEnabled={soundEnabled}
@@ -450,8 +479,10 @@ export const App: React.FC = () => {
             evalScore={evalScore}
             capturedWhite={capturedWhite}
             capturedBlack={capturedBlack}
-            whiteName={mode === 'online' ? (playerColor === 'w' ? 'You (White)' : 'Opponent (White)') : 'White Bunny 🐰'}
-            blackName={mode === 'online' ? (playerColor === 'b' ? 'You (Black)' : 'Opponent (Black)') : 'Black Bunny 🌸'}
+            whiteName={mode === 'online' ? (playerColor === 'w' ? 'You (White)' : 'Opponent (White)') : 'White Bunny'}
+            blackName={mode === 'online' ? (playerColor === 'b' ? 'You (Black)' : 'Opponent (Black)') : 'Black Bunny'}
+            timerEnabled={timerEnabled}
+            onToggleTimer={() => setTimerEnabled(prev => !prev)}
           />
 
           <ChessBoard
@@ -545,7 +576,12 @@ export const App: React.FC = () => {
       )}
 
       {showReviewModal && (
-        <GameReviewModal history={history} onClose={() => setShowReviewModal(false)} />
+        <GameReviewModal
+          history={history}
+          playerColor={playerColor}
+          gameOverResult={gameOverResult}
+          onClose={() => setShowReviewModal(false)}
+        />
       )}
 
       {showSettingsModal && (

@@ -33,22 +33,9 @@ export const BottomControls: React.FC<BottomControlsProps> = ({
   };
 
   return (
-    <div
-      className="bunny-card"
-      style={{
-        width: '100%',
-        maxWidth: '580px',
-        padding: '0.6rem 0.8rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '0.4rem',
-        flexWrap: 'wrap'
-      }}
-    >
+    <div className="bunny-card bottom-controls-card">
       <button
-        className="bunny-btn"
-        style={{ padding: '0.45rem 0.85rem', fontSize: '0.82rem' }}
+        className="bunny-btn btn-new-game"
         onClick={() => handleClick(onNewGame)}
       >
         <PlusCircle size={15} /> New Game
@@ -57,7 +44,7 @@ export const BottomControls: React.FC<BottomControlsProps> = ({
       <button
         className="bunny-btn bunny-btn-secondary"
         disabled={!canUndo}
-        style={{ padding: '0.45rem 0.75rem', fontSize: '0.82rem', opacity: canUndo ? 1 : 0.4 }}
+        style={{ opacity: canUndo ? 1 : 0.4 }}
         onClick={() => canUndo && handleClick(onUndo)}
       >
         <RotateCcw size={15} /> Undo
@@ -66,7 +53,7 @@ export const BottomControls: React.FC<BottomControlsProps> = ({
       <button
         className="bunny-btn bunny-btn-secondary"
         disabled={!canRedo}
-        style={{ padding: '0.45rem 0.75rem', fontSize: '0.82rem', opacity: canRedo ? 1 : 0.4 }}
+        style={{ opacity: canRedo ? 1 : 0.4 }}
         onClick={() => canRedo && handleClick(onRedo)}
       >
         <RotateCw size={15} /> Redo
@@ -74,7 +61,6 @@ export const BottomControls: React.FC<BottomControlsProps> = ({
 
       <button
         className="bunny-btn bunny-btn-secondary"
-        style={{ padding: '0.45rem 0.75rem', fontSize: '0.82rem' }}
         onClick={() => handleClick(onHint)}
       >
         <Lightbulb size={15} color="#FF4FA3" /> Hint
@@ -82,7 +68,6 @@ export const BottomControls: React.FC<BottomControlsProps> = ({
 
       <button
         className="bunny-btn bunny-btn-secondary"
-        style={{ padding: '0.45rem 0.75rem', fontSize: '0.82rem' }}
         onClick={() => handleClick(onAnalysis)}
       >
         <Sparkles size={15} color="#FF7AC1" /> Review
@@ -91,7 +76,7 @@ export const BottomControls: React.FC<BottomControlsProps> = ({
       <button
         className="bunny-btn bunny-btn-secondary"
         disabled={isGameOver}
-        style={{ padding: '0.45rem 0.75rem', fontSize: '0.82rem', opacity: !isGameOver ? 1 : 0.4 }}
+        style={{ opacity: !isGameOver ? 1 : 0.4 }}
         onClick={() => !isGameOver && handleClick(onOfferDraw)}
       >
         <HeartHandshake size={15} /> Draw
@@ -100,7 +85,7 @@ export const BottomControls: React.FC<BottomControlsProps> = ({
       <button
         className="bunny-btn bunny-btn-secondary"
         disabled={isGameOver}
-        style={{ padding: '0.45rem 0.75rem', fontSize: '0.82rem', opacity: !isGameOver ? 1 : 0.4 }}
+        style={{ opacity: !isGameOver ? 1 : 0.4 }}
         onClick={() => !isGameOver && handleClick(onResign)}
       >
         <Flag size={15} /> Resign
