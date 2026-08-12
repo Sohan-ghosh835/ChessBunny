@@ -365,7 +365,8 @@ class StockfishService {
   public analyzeGame(
     history: string[],
     userColor: 'w' | 'b' = 'w',
-    gameOverResult?: { winner: 'w' | 'b' | 'draw' | null; reason: string }
+    gameOverResult?: { winner: 'w' | 'b' | 'draw' | null; reason: string },
+    startingFen?: string
   ): {
     accuracy: number;
     whiteAccuracy: number;
@@ -389,13 +390,20 @@ class StockfishService {
     }
 
     const tempChess = new Chess();
+    // Load the puzzle/custom starting position if provided
+    if (startingFen) {
+      try { tempChess.load(startingFen); } catch (_) { /* fallback to default */ }
+    }
+    // Determine side-to-move offset based on starting FEN
+    const startTurn = tempChess.turn(); // 'w' or 'b'
     const analyses: ReviewMoveAnalysis[] = [];
-    let prevEval = 0;
+    let prevEval = this.evaluatePosition(tempChess);
     const whiteAccuracies: number[] = [];
     const blackAccuracies: number[] = [];
 
     history.forEach((sanMove, index) => {
-      const moveColor: 'w' | 'b' = index % 2 === 0 ? 'w' : 'b';
+      // Derive the correct colour based on actual starting turn, not always white
+      const moveColor: 'w' | 'b' = (startTurn === 'w') ? (index % 2 === 0 ? 'w' : 'b') : (index % 2 === 0 ? 'b' : 'w');
 
       // Capture material before move
       const boardBefore = tempChess.board();

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Sparkles, Award, AlertTriangle, AlertCircle, CheckCircle2, Zap, X, TrendingUp } from 'lucide-react';
 import { stockfishService } from '../../services/stockfishService';
 
@@ -6,6 +6,7 @@ interface GameReviewModalProps {
   history: string[];
   playerColor?: 'w' | 'b';
   gameOverResult?: { winner: 'w' | 'b' | 'draw' | null; reason: string };
+  startingFen?: string;
   onClose: () => void;
 }
 
@@ -36,9 +37,53 @@ export const GameReviewModal: React.FC<GameReviewModalProps> = ({
   history,
   playerColor = 'w',
   gameOverResult,
+  startingFen,
   onClose
 }) => {
-  const review = stockfishService.analyzeGame(history, playerColor, gameOverResult);
+  const review = useMemo(() => {
+    try {
+      return stockfishService.analyzeGame(history, playerColor, gameOverResult, startingFen);
+    } catch (e) {
+      return null;
+    }
+  }, [history, playerColor, gameOverResult, startingFen]);
+
+  if (!review) {
+    return (
+      <div className="modal-overlay">
+        <div
+          className="bunny-card modal-content"
+          style={{
+            width: '92%',
+            maxWidth: '480px',
+            padding: '1.6rem 1.3rem',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '1rem',
+            position: 'relative'
+          }}
+        >
+          <button
+            onClick={onClose}
+            style={{ position: 'absolute', top: '12px', right: '12px', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
+          >
+            <X size={20} />
+          </button>
+          <div style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--accent)', fontFamily: 'var(--font-heading)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Sparkles size={22} /> Game Analysis
+          </div>
+          <div style={{ textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.9rem', padding: '2rem 1rem' }}>
+            <div style={{ marginBottom: '0.75rem', display: 'flex', justifyContent: 'center' }}>
+              <Sparkles size={36} color="var(--accent)" />
+            </div>
+            <div style={{ fontWeight: 700, marginBottom: '0.4rem' }}>Analysis unavailable</div>
+            <div>Play some moves first, then open Game Review to see your analysis!</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const statItems = [
     { key: 'brilliant',  label: 'Brilliant',   count: review.brilliantCount,  color: '#00C853' },
@@ -52,7 +97,7 @@ export const GameReviewModal: React.FC<GameReviewModalProps> = ({
   // Accuracy gradient colour — green → yellow → red
   const accColor = review.accuracy >= 80 ? '#00C853' : review.accuracy >= 60 ? '#FFA000' : '#FF355E';
 
-  const isPuzzle = !history || history.length <= 6;
+  const isPuzzle = !!startingFen || (!history || history.length <= 6);
 
   return (
     <div className="modal-overlay">

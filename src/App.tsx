@@ -73,6 +73,7 @@ export const App: React.FC = () => {
   // Puzzle state
   const [currentPuzzleCategoryId, setCurrentPuzzleCategoryId] = useState<string | null>(null);
   const [currentPuzzleTitle, setCurrentPuzzleTitle] = useState<string | undefined>(undefined);
+  const [currentPuzzleFen, setCurrentPuzzleFen] = useState<string | undefined>(undefined);
 
   // Pending Promotion State
   const [pendingMove, setPendingMove] = useState<{ from: Square; to: Square } | null>(null);
@@ -419,6 +420,7 @@ export const App: React.FC = () => {
     setShowPuzzleModal(false);
     if (puzzle.categoryId) setCurrentPuzzleCategoryId(puzzle.categoryId);
     if (puzzle.title) setCurrentPuzzleTitle(puzzle.title);
+    setCurrentPuzzleFen(puzzle.fen);
     resetGame(puzzle.fen);
   };
 
@@ -429,6 +431,7 @@ export const App: React.FC = () => {
       return;
     }
     const puzzle = getRandomPuzzleForCategory(currentPuzzleCategoryId);
+    setCurrentPuzzleFen(puzzle.fen);
     resetGame(puzzle.fen);
   };
 
@@ -580,6 +583,7 @@ export const App: React.FC = () => {
           history={history}
           playerColor={playerColor}
           gameOverResult={gameOverResult}
+          startingFen={mode === 'puzzle' ? currentPuzzleFen : undefined}
           onClose={() => setShowReviewModal(false)}
         />
       )}
