@@ -1,5 +1,5 @@
 export const WINNING_QUOTES: string[] = [
-  "That was such a beautiful game baby. Your brain is honestly terrifyingly attractive.",
+  "That was such a beautiful game baby. Your brain is honestly terrifyingly attractive <3",
   "You didn’t just win that match, you completely outsmarted. I’m so proud of my brilliant girl.",
   "Watching you play is honestly unfair, how can someone be this pretty AND this smart?",
   "That final move was so you, calm, clever, and absolutely devastating.",
