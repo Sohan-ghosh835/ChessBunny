@@ -1,8 +1,8 @@
 export const WINNING_QUOTES: string[] = [
-  "That was such a beautiful game baby. Your brain is honestly terrifyingly attractive <3",
+  "That was such a beautiful game baby. Your brain is honestly terrifyingly attractive.",
   "You didn’t just win that match, you completely outsmarted. I’m so proud of my brilliant girl.",
   "Watching you play is honestly unfair, how can someone be this pretty AND this smart?",
-  "That final move was *so* you, calm, clever, and absolutely devastating.",
+  "That final move was so you, calm, clever, and absolutely devastating.",
   "I knew you were going to win. I just didn’t know you’d make it look that easy.",
   "My girl really looked at the board, calculated everything, and chose violence.",
   "You played that game like you already knew how it was going to end. That confidence looks ridiculously good on you.",
@@ -15,7 +15,7 @@ export const WINNING_QUOTES: string[] = [
   "You were so composed the whole game. Meanwhile I’m over here being ridiculously proud of you.",
   "Checkmate looks really good on you, baby.",
   "You didn’t just beat your opps, you made them question every decision they’ve ever made.",
-  "Brains, confidence, patience, and that smile after a win… yeah, I’m definitely obsessed with you.",
+  "Brains, confidence, patience, and that smile after a win, yeah, I’m definitely obsessed with you.",
   "I hope you know how genuinely proud I am whenever I see you accomplish something like this. You’re amazing, love.",
   "Another match, another reminder that my girlfriend is ridiculously talented. Keep winning, superstar.",
   "Congratulations, my love. You played brilliantly, you fought till the end, and you earned that win. Now come here and let me celebrate my champion."
