@@ -549,6 +549,8 @@ export const App: React.FC = () => {
         <GameOverModal
           winner={gameOverResult.winner}
           reason={gameOverResult.reason}
+          mode={mode}
+          playerColor={playerColor}
           onNewGame={() => {
             setShowGameOver(false);
             if (mode === 'puzzle') {
